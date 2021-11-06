@@ -35,6 +35,13 @@ dependencies {
     // https://mvnrepository.com/artifact/org.jsoup/jsoup
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation 'junit:junit:4.13.1'
+    // https://mvnrepository.com/artifact/com.oracle.database.security/oraclepki
+    implementation 'com.oracle.database.security:oraclepki:21.3.0.0'
+    // https://mvnrepository.com/artifact/com.oracle.database.security/osdt_core
+    implementation 'com.oracle.database.security:osdt_core:21.3.0.0'
+    // https://mvnrepository.com/artifact/com.oracle.database.security/osdt_cert
+    implementation 'com.oracle.database.security:osdt_cert:21.3.0.0'
+
 //    implementation 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
 }
 

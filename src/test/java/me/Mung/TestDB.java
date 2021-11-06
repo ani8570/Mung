@@ -13,7 +13,7 @@ import static me.Mung.util.DBConnection.rs;
 public class TestDB {
 
     @Test
-    public static void main(String[] args) throws SQLException {
+    public void jdbcTest() throws SQLException {
         String sql = "{call CALLUSER(?)}";
 
         try {

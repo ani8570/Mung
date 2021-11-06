@@ -12,7 +12,7 @@ import static me.Mung.util.DBConnection1.rs;
 public class TestDB2 {
 
     @Test
-    public static void main(String[] args) throws SQLException {
+    public void jdbcTest2() throws SQLException {
         String sql = "select * from test_table";
 
         try {

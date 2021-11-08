@@ -8,14 +8,13 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CommandFind implements Command {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommandFind.class);
+public class CommandMkchar implements Command {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommandMkchar.class);
 
     @Override
     public void performCommand(Member m, TextChannel channel, Message message) {
 //        LOGGER.info(getClass().getSimpleName());
         String[] cmd = message.getContentRaw().split(" ");
-
 
         Double char_lv = SearchLevel.FindLevel(cmd[1]);
         if(cmd.length != 2 || char_lv == null) {

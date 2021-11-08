@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class LAinquiry {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LAinquiry.class);
+public class SearchLevel {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchLevel.class);
 
-    public static Double LVinquiry(String charName) {
+    public static Double FindLevel(String charName) {
         Double d = null;
         String URL = "https://lostark.game.onstove.com/Profile/Character/";
         URL += charName;
@@ -30,7 +30,6 @@ public class LAinquiry {
             String i = (L[2] + L[3]).replaceAll(",", "");
             d = Double.parseDouble(i);
         }
-        LOGGER.info("URL {}", d);
         return d;
     }
 

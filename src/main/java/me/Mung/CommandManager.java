@@ -3,6 +3,8 @@ package me.Mung;
 import me.Mung.Commands.CommandKVoice;
 import me.Mung.Commands.CommandPing;
 import me.Mung.Commands.LostArk.CommandFind;
+import me.Mung.Commands.LostArk.CommandLs;
+import me.Mung.Commands.LostArk.CommandMkchar;
 import me.Mung.type.Command;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -23,7 +25,8 @@ public class CommandManager implements Command {
         commands.put("ping", new CommandPing());
         commands.put("kv", new CommandKVoice());
         commands.put("find", new CommandFind());
-//        commands.put("mkdir", new CommandMkdir());
+        commands.put("ls", new CommandLs());
+        commands.put("mkchar", new CommandMkchar());
 //        commands.put("rm", new CommandRm());
 //        commands.put("ls", new CommandLs());
     }

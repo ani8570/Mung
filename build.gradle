@@ -41,8 +41,9 @@ dependencies {
     implementation 'com.oracle.database.security:osdt_core:21.3.0.0'
     // https://mvnrepository.com/artifact/com.oracle.database.security/osdt_cert
     implementation 'com.oracle.database.security:osdt_cert:21.3.0.0'
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly 'org.projectlombok:lombok:1.18.12'
 
-//    implementation 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
 }
 
 
@@ -64,4 +65,8 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+}
+
+test {
+    testLogging.showStandardStreams = true
 }

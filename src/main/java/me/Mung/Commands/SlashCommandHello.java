@@ -1,16 +1,20 @@
 package me.Mung.Commands;
 
+import me.Mung.Commands.LostArk.SlashCommandFind;
 import me.Mung.type.SlashCommand;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.components.Button;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SlashCommandHello implements SlashCommand {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlashCommandHello.class);
     @Override
     public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
-//        event.reply(event.getOption("msg").getAsString()).queue();
+        LOGGER.info(getClass().getSimpleName());
         event.reply("Click the button to say hello").setEphemeral(true)
                 .addActionRow(
                         Button.primary("hello", "Click Me"), // Button with only a label

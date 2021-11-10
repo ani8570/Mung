@@ -1,5 +1,6 @@
 package me.Mung;
 
+import me.Mung.Commands.LostArk.*;
 import me.Mung.Commands.SlashCommandHello;
 import me.Mung.type.Command;
 import me.Mung.type.SlashCommand;
@@ -31,17 +32,17 @@ public class SlashCommandManager extends ListenerAdapter {
         commandMap = new ConcurrentHashMap<>();
         CommandListUpdateAction commands = jda.updateCommands();
         commandMap.put("hello", new SlashCommandHello());
+        commandMap.put("find", new SlashCommandFind());
+
         commands.addCommands(new CommandData("hello", "hello")
                 .addOptions(new OptionData(OptionType.STRING, "msg", "The message to resend.").setRequired(true)));
-
-        jda.upsertCommand("ping", "Calculate ping of the bot").queue(); // This can take up to 1 hour to show up in the client
-//        jda.upsertCommand("hello", "hello").queue(); // This can take up to 1 hour to show up in the client
-        jda.upsertCommand("info", "info").queue(); // This can take up to 1 hour to show up in the client
+        jda.upsertCommand("find", "Find your Charactor").addOptions()
+                .addOptions(new OptionData(OptionType.STRING, "chn", "Charactor Name ")
+                        .setRequired(true)).queue();
     }
 
     @Override
     public void onSlashCommand(SlashCommandEvent event) {
-        LOGGER.info("onSlashCommand");
         String commandName = event.getName();
         SlashCommand command;
         if ((command = commandMap.get(commandName)) != null) {

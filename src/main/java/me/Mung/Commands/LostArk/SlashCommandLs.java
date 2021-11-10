@@ -3,6 +3,7 @@ package me.Mung.Commands.LostArk;
 import me.Mung.Model.UserDAO;
 import me.Mung.Model.UserVO;
 import me.Mung.type.Command;
+import me.Mung.type.SlashCommand;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -13,8 +14,8 @@ import java.util.List;
 
 import static me.Mung.util.Textformat.D2S;
 
-public class CommandLs implements Command {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommandLs.class);
+public class SlashCommandLs implements Command {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlashCommandLs.class);
 
     @Override
     public void performCommand(Member m, TextChannel channel, Message message) {

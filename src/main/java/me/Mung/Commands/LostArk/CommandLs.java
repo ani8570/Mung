@@ -1,18 +1,17 @@
 package me.Mung.Commands.LostArk;
 
+import me.Mung.Model.UserDAO;
+import me.Mung.Model.UserVO;
 import me.Mung.type.Command;
-import me.Mung.util.SearchLevel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
 
-import static me.Mung.util.DBConnection.ds;
-import static me.Mung.util.DBConnection.rs;
+import static me.Mung.util.Textformat.D2S;
 
 public class CommandLs implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandLs.class);
@@ -25,19 +24,18 @@ public class CommandLs implements Command {
         LOGGER.info(m.getId());
         if (cmd.length > 1) {
             LOGGER.error("Undefined Command");
+            return;
         }
-        String sql = "select * from LA.user_id where id_name = ?";
-        try {
-            PreparedStatement pstmt = ds.getConnection().prepareStatement(sql);
-            pstmt.setString(1, m.getId());
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                LOGGER.info("{} {} {}", rs.getString(1), rs.getString(2), rs.getInt(3));
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<UserVO> list = UserDAO.getCharList(m.getId());
+        StringBuffer s = new StringBuffer();
+        list.forEach(chr -> {
+            LOGGER.info("{}", chr);
+            s.append(D2S(chr.getCur_level()));
+            s.append("    \t");
+            s.append(chr.getChar_name());
+            s.append("\n");
+        });
+        message.reply(s).queue();
     }
 
 }

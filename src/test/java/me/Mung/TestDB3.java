@@ -15,7 +15,7 @@ public class TestDB3 {
 
     @Test
     public void jdbcTest3() throws SQLException {
-        String sql = "select * from LA.user_id where id_name = ?";
+        String sql = "select * from LA.user_table where id_name = ?";
 
         try {
             PreparedStatement pstmt = ds.getConnection().prepareStatement(sql);

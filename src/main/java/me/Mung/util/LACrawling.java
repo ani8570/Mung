@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class SearchLevel {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchLevel.class);
+public class LACrawling {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LACrawling.class);
 
     public static Double FindLevel(String charName) {
         Double d = null;

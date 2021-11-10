@@ -1,4 +1,4 @@
-package me.Mung.Domain;
+package me.Mung.Model;
 
 public class CharacterVO {
     String char_name;

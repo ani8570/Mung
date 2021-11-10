@@ -1,4 +1,4 @@
-package me.Mung.Domain;
+package me.Mung.Model;
 
 import java.util.List;
 

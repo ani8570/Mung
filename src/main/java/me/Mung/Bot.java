@@ -48,6 +48,7 @@ public class Bot {
         new WalkScheduler().execute(11, 00, 00);
         new WalkScheduler().execute(16, 00, 00);
         new WalkScheduler().execute(21, 30, 00);
+
     }
 
     private void consoleListener() {
@@ -82,7 +83,4 @@ public class Bot {
     public static void main(String[] args) throws LoginException {
         new Bot();
     }
-
-    //크롤링 후
-    //sql 읽기
 }

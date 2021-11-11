@@ -14,8 +14,8 @@ public class TestUserDAO3 {
     @Test
     public void TestF() throws SQLException {
         UserVO userVO = new UserVO();
-        userVO.setId_name("c");
-        userVO.setChar_name("asd");
+        userVO.setId_name("530042930732335113");
+        userVO.setChar_name("남궁다");
         userVO.setCur_level(1445.0);
         UserDAO.deleteUser(userVO);
     }

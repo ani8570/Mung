@@ -9,9 +9,12 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public class SlashCommandHelp implements SlashCommand {
     private static final Logger LOGGER = LoggerFactory.getLogger(SlashCommandHelp.class);
 
+    //  모든 명령어를 reply형태로 보여준다.
     @Override
     public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
         LOGGER.info(getClass().getSimpleName());

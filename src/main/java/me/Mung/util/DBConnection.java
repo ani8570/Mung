@@ -19,6 +19,9 @@ public class DBConnection {
         CONFIG.setJdbcUrl(Config.get("Cloud_URL"));
         CONFIG.setUsername(Config.get("Cloud_Id"));
         CONFIG.setPassword(Config.get("Cloud_Password"));
+//        CONFIG.setMaxLifetime(30L);
+//        CONFIG.time
+//        CONFIG.setConnectionTimeout(40000L);
         ds = new HikariDataSource(CONFIG);
     }
 

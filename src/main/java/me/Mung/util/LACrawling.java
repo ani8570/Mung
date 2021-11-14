@@ -34,27 +34,8 @@ public class LACrawling {
     }
 
     public static void main(String[] args) {
-        Double d = null;
         String charName = "남궁다";
-
-        String URL = "https://lostark.game.onstove.com/Profile/Character/";
-        URL += charName;
-
-        Connection conn = Jsoup.connect(URL);
-        Document html = null;
-        try {
-            html = conn.get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//        System.out.println(html);
-        Elements fileBlocks = html.getElementsByClass("level-info2__item");
-        if (fileBlocks.size() != 0) {
-            String[] L = fileBlocks.select("span").get(1).toString().split("<small>|</small>");
-            String i = (L[2] + L[3]).replaceAll(",", "");
-            d = Double.parseDouble(i);
-
-        }
+        Double d = FindLevel(charName);
         LOGGER.info("URL {}", d);
     }
 }

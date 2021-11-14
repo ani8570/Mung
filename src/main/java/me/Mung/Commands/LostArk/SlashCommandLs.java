@@ -1,7 +1,7 @@
 package me.Mung.Commands.LostArk;
 
-import me.Mung.Model.UserDAO;
-import me.Mung.Model.UserVO;
+import me.Mung.Model.PlayerDAO;
+import me.Mung.Model.PlayerVO;
 import me.Mung.type.SlashCommand;
 import me.Mung.util.LACrawling;
 import net.dv8tion.jda.api.entities.Member;
@@ -14,46 +14,48 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static me.Mung.util.Textformat.D2S;
 
 public class SlashCommandLs implements SlashCommand {
     private static final Logger LOGGER = LoggerFactory.getLogger(SlashCommandLs.class);
 
+    //  DB에 저장된 디스코드 사용자ID를 기반으로 캐릭터 목록 및 레벨을 가져온다.
     @Override
     public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
         LOGGER.info(getClass().getSimpleName());
-        OptionMapping N = event.getOption("character");
-        StringBuffer s = new StringBuffer();
-        if (N == null) {
-            List<UserVO> list = UserDAO.getCharList(m.getId());
-            if (list.size() == 1) {
-                LOGGER.error("Not located user");
+        OptionMapping char_name = event.getOption("character");
+        StringBuffer replyMessage = new StringBuffer();
+        // 이름이 없으면 아이디에 등록된 캐릭터들 최신화 목록 가져옴
+        if (char_name == null) {
+            List<PlayerVO> list = PlayerDAO.getCharList(m.getId());
+            if (list.size() == 0) {
+                LOGGER.error("Not located player");
                 return;
             }
-            list.forEach(chr -> {
-                LOGGER.info("{}", chr);
-                s.append(D2S(chr.getCur_level()));
-                s.append("\t");
-                s.append(chr.getChar_name());
-                s.append("\n");
+            list.forEach(player -> {
+                LOGGER.info("{}", player);
+//                PlayerDAO.updatePlayer(player);
+                replyMessage.append(String.format("%-10.2f\t", player.getCur_level()));
+                replyMessage.append(player.getChar_name());
+                replyMessage.append("\n");
             });
-        } else {
-            UserVO user = new UserVO();
-            user.setId_name(m.getId());
-            user.setChar_name(N.getAsString());
-            user.setCur_level(LACrawling.FindLevel(user.getChar_name()));
-            String char_lv = D2S(user.getCur_level());
-            if (char_lv == null) {
-                LOGGER.error("Non User name");
+        }
+        // 이름이 있으면 레벨 최신화 하고 캐릭터 가져옴
+        else {
+            PlayerVO player = new PlayerVO();
+            player.setId_name(m.getId());
+            player.setChar_name(char_name.getAsString());
+            player.setCur_level(LACrawling.FindLevel(player.getChar_name()));
+            if (player.getCur_level() == null) {
+                LOGGER.error("Non player char_name");
                 return;
             }
-            UserDAO.updateUser(user);
-            LOGGER.info("{}", user);
-            s.append(char_lv);
-            s.append("\t");
-            s.append(user.getChar_name());
+            PlayerDAO.updatePlayer(player);
+            LOGGER.info("{}", player);
+            replyMessage.append(String.format("%-10.2f\t", player.getCur_level()));
+            replyMessage.append(player.getChar_name());
         }
-        event.reply(String.valueOf(s)).setEphemeral(true).queue();//m-> m.delete()queueAfter(20L, TimeUnit.SECONDS);
+        event.reply(String.valueOf(replyMessage)).setEphemeral(true).queue();//m-> m.delete()queueAfter(20L, TimeUnit.SECONDS);
 
     }
+
 }

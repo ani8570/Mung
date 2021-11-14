@@ -3,8 +3,10 @@
  */
 package me.Mung;
 
+import me.Mung.listener.CommandManager;
 import me.Mung.listener.EventListener;
 import me.Mung.listener.MessageListener;
+import me.Mung.listener.SlashCommandManager;
 import me.Mung.util.WalkScheduler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;

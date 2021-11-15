@@ -21,23 +21,23 @@ public class SlashCommandLs implements SlashCommand {
     //  DB에 저장된 디스코드 사용자ID를 기반으로 캐릭터 목록 및 레벨을 가져온다.
     @Override
     public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
-        LOGGER.info(getClass().getSimpleName());
+        LOGGER.info(m.getUser().getAsTag());
         OptionMapping char_name = event.getOption("character");
         StringBuffer replyMessage = new StringBuffer();
         // 이름이 없으면 아이디에 등록된 캐릭터들 최신화 목록 가져옴
         if (char_name == null) {
             List<PlayerVO> list = PlayerDAO.getCharList(m.getId());
             if (list.size() == 0) {
+                replyMessage.append("/mk로 등록을 먼저하세요");
                 LOGGER.error("Not located player");
-                return;
+            } else {
+                list.forEach(player -> {
+                    replyMessage.append(String.format("%-10.2f\t", player.getCur_level()));
+                    replyMessage.append(player.getChar_name());
+                    replyMessage.append("\n");
+                    LOGGER.info("{}", player);
+                });
             }
-            list.forEach(player -> {
-                LOGGER.info("{}", player);
-//                PlayerDAO.updatePlayer(player);
-                replyMessage.append(String.format("%-10.2f\t", player.getCur_level()));
-                replyMessage.append(player.getChar_name());
-                replyMessage.append("\n");
-            });
         }
         // 이름이 있으면 레벨 최신화 하고 캐릭터 가져옴
         else {

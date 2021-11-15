@@ -17,24 +17,21 @@ public class PlayerDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(PlayerDAO.class);
 
     public static List<PlayerVO> getCharList(String id) {
-        String sql = "select * from LA.PLAYER " +
-                "where id_name = ?" +
-                "order by cur_lv DESC";
+        String sql = "select * from LA.PLAYER where id_name = ? order by cur_lv DESC";
         List<PlayerVO> list = new ArrayList<>();
         try {
             PreparedStatement pstmt = ds.getConnection().prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                PlayerVO user = new PlayerVO();
-                user.setId_name(rs.getString(1));
-                user.setChar_name(rs.getString(2));
-                user.setCur_level(LACrawling.FindLevel(user.getChar_name()));
-//                updatePlayer(user);
-                list.add(user);
+                PlayerVO player = new PlayerVO();
+                player.setId_name(rs.getString(1));
+                player.setChar_name(rs.getString(2));
+                player.setCur_level(LACrawling.FindLevel(player.getChar_name()));
+                list.add(player);
             }
         } catch (SQLException e) {
-            LOGGER.error("GetList : {}", e);
+            LOGGER.error("GetList : {}", e.getMessage());
             e.printStackTrace();
         }
         return list;
@@ -53,8 +50,7 @@ public class PlayerDAO {
             pstmt.setDouble(3, user.getCur_level());
             pstmt.executeQuery();
         } catch (SQLException e) {
-            LOGGER.error("Insert : {}", e);
-            e.printStackTrace();
+            LOGGER.error("Insert : {}", e.getMessage());
             return 0;
         }
         return 1;
@@ -69,8 +65,7 @@ public class PlayerDAO {
             pstmt.setDouble(3, user.getCur_level());
             pstmt.executeQuery();
         } catch (SQLException e) {
-            LOGGER.error("Delete : {}", e);
-            e.printStackTrace();
+            LOGGER.error("Delete : {}", e.getMessage());
             return 0;
         }
         return 1;
@@ -84,8 +79,7 @@ public class PlayerDAO {
             pstmt.setString(2, user.getChar_name());
             pstmt.executeQuery();
         } catch (SQLException e) {
-            LOGGER.error("Update : {}", e);
-            e.printStackTrace();
+            LOGGER.error("Update : {}", e.getMessage());
         }
     }
 }

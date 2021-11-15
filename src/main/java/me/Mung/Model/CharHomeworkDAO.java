@@ -11,20 +11,19 @@ import java.util.List;
 import static me.Mung.util.DBConnection.ds;
 import static me.Mung.util.DBConnection.rs;
 
-public class IdHomeworkDAO {
-    private static final Logger LOGGER = LoggerFactory.getLogger(IdHomeworkDAO.class);
+public class CharHomeworkDAO {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CharHomeworkDAO.class);
 
-    public static List<IdHomeworkVO> getIdHomeworkList(String id) {
-        String sql = "select * from LA.Id_homework where id_name = ?";
-
-        List<IdHomeworkVO> list = new ArrayList<>();
+    public static List<CharHomeworkVO> getIdHomeworkList(String id) {
+        String sql = "select * from LA.Char_homework where char_name in (select char_name from player where id_name = ?) order by cur_lv";
+        List<CharHomeworkVO> list = new ArrayList<>();
         try {
             PreparedStatement pstmt = ds.getConnection().prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                IdHomeworkVO player = new IdHomeworkVO();
-                player.setId_name(rs.getString(1));
+                CharHomeworkVO player = new CharHomeworkVO();
+                player.setChar_name(rs.getString(1));
                 player.setDungeon_name(rs.getString(2));
                 player.setCnt(rs.getInt(3));
                 list.add(player);

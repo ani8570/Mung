@@ -62,7 +62,7 @@ public class SlashCommandHello2 implements SlashCommand, ButtonCommand, Selectio
                         Button.primary("H2:switch", "Click Me") // Button with only a label
 //                        Button.danger("H2:off", "Click Me") // Button with only an emoji
                 )
-                .setContent("남궁다123!!!").queue();
+                .queue();
 
     }
 

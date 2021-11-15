@@ -12,11 +12,10 @@ public class CommandPing implements Command {
 
     @Override
     public void performCommand(Member m, TextChannel channel, Message message) {
-        LOGGER.info(getClass().getSimpleName());
         LOGGER.info(m.getId());
+        LOGGER.info(m.getUser().getAsTag());
         message.reply("Pong!").queue();
         channel.sendMessage(":ping_pong: " + m.getAsMention()).queue();
-//        channel.sendMessage(m.getEffectiveName()).queue();
 
     }
 }

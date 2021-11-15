@@ -16,8 +16,7 @@ public class CharDungeonDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(CharDungeonDAO.class);
 
     public static List<CharDungeonVO> getCharDungeonList() {
-        String sql = "select * from LA.char_DUNGEON " +
-                "order by cur_lv";
+        String sql = "select * from LA.char_DUNGEON order by cur_lv";
         List<CharDungeonVO> list = new ArrayList<>();
         try {
             Statement stmt = ds.getConnection().createStatement();
@@ -30,8 +29,7 @@ public class CharDungeonDAO {
                 list.add(charDungeonVO);
             }
         } catch (SQLException e) {
-            LOGGER.error("GetList : {}", e);
-            e.printStackTrace();
+            LOGGER.error("GetList : {}", e.getMessage());
         }
         return list;
     }

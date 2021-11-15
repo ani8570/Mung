@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static me.Mung.util.LACrawling.FindLevel;
@@ -19,27 +20,26 @@ public class SlashCommandMk implements SlashCommand {
     //  디스코드 사용자ID로 캐릭터를 DB에 등록시킨다.
     @Override
     public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
-        LOGGER.info(getClass().getSimpleName());
+        LOGGER.info(m.getUser().getAsTag());
         final int FAIL = 0;
         PlayerVO user = new PlayerVO();
         user.setId_name(m.getId());
-        user.setChar_name(event.getOption("character").getAsString());
+        user.setChar_name(Objects.requireNonNull(event.getOption("character")).getAsString());
         user.setCur_level(FindLevel(user.getChar_name()));
+        StringBuilder s = new StringBuilder();
+        s.append(user.getChar_name());
         if (user.getCur_level() == null) {
             LOGGER.error("Non User name");
-            return;
-        }
-        if (PlayerDAO.insertPlayer(user) == FAIL) {
+            s.append("는 없는 케릭터입니다.");
+        } else if (PlayerDAO.insertPlayer(user) == FAIL) {
             LOGGER.error("Already exist");
-            event.reply("이미 데이터에 있습니다.\n /rm명령어를 통해 제거하고 재등록하세요").setEphemeral(true).queue();
-            return;
+            s.append("는 이미 데이터에 있습니다.\n /rm명령어를 통해 제거하고 재등록하세요");
+        } else {
+            LOGGER.info("{}", user);
+            s.append("를 ");
+            s.append(m.getUser().getAsTag());
+            s.append("에 등록");
         }
-        LOGGER.info("{}", user);
-        StringBuffer s = new StringBuffer();
-        s.append(m.getEffectiveName());
-        s.append("에 ");
-        s.append(user.getChar_name());
-        s.append(" 등록");
         event.reply(String.valueOf(s)).setEphemeral(true).queue();
     }
 }

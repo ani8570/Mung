@@ -17,8 +17,7 @@ public class IdDungeonDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(IdDungeonDAO.class);
 
     public static List<IdDungeonVO> getIdDungeonList() {
-        String sql = "select * from LA.ID_DUNGEON " +
-                "order by cur_lv DESC";
+        String sql = "select * from LA.ID_DUNGEON order by cur_lv DESC";
         List<IdDungeonVO> list = new ArrayList<>();
         try {
             Statement stmt = ds.getConnection().createStatement();
@@ -30,8 +29,7 @@ public class IdDungeonDAO {
                 list.add(dungeonVO);
             }
         } catch (SQLException e) {
-            LOGGER.error("GetList : {}", e);
-            e.printStackTrace();
+            LOGGER.error("GetList : {}", e.getMessage());
         }
         return list;
     }

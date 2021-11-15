@@ -16,13 +16,14 @@ public class SlashCommandHelp implements SlashCommand {
 
     //  모든 명령어를 reply형태로 보여준다.
     @Override
-    public void performCommand(SlashCommandEvent event) {
+    public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
         LOGGER.info(getClass().getSimpleName());
 
-        String s = "/ls (캐릭터명) : 등록한 내 모든(특정) 캐릭터 Lv 조회\n" +
-                "/mk 캐릭터명 : 내 아이디에 캐릭터 등록\n" +
-                "/rm 캐릭터명 : 모든 목록에서 캐릭터 삭제\n";
-        event.reply(s).setEphemeral(true).queue();
+        StringBuffer s = new StringBuffer();
+        s.append("/ls (캐릭터명) : 등록한 내 모든(특정) 캐릭터 Lv 조회\n");
+        s.append("/mk 캐릭터명 : 내 아이디에 캐릭터 등록\n");
+        s.append("/rm 캐릭터명 : 모든 목록에서 캐릭터 삭제\n");
+        event.reply(String.valueOf(s)).setEphemeral(true).queue();
         LOGGER.info("Call help");
     }
 

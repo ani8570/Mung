@@ -75,7 +75,7 @@ public class SlashCommandManager extends ListenerAdapter {
         String commandName = event.getName();
         SlashCommand command;
         if ((command = commandMap.get(commandName)) != null) {
-            command.performCommand(event);
+            command.performCommand(event, event.getMember(), event.getTextChannel());
         }
     }
 

@@ -26,7 +26,7 @@ public class SlashCommandCat implements SlashCommand, ButtonCommand {
     }
     //  원정대 및 캐릭터 별 숙제 리스트 보여주기
     @Override
-    public void performCommand(SlashCommandEvent event) {
+    public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
         LOGGER.info(getClass().getSimpleName());
         OptionMapping char_name = event.getOption("character");
         StringBuffer replyMessage = new StringBuffer();

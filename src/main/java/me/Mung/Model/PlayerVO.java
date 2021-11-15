@@ -1,12 +1,12 @@
 package me.Mung.Model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class PlayerVO {
     private String id_name;
     private String char_name;

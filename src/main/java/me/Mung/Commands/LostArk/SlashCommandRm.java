@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class SlashCommandRm implements SlashCommand {
@@ -17,12 +16,13 @@ public class SlashCommandRm implements SlashCommand {
 
     //  해당 캐릭터를 DB에 삭제시킨다.
     @Override
-    public void performCommand(SlashCommandEvent event) {
+    public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
         LOGGER.info(getClass().getSimpleName());
-        PlayerVO user = new PlayerVO(
-                Objects.requireNonNull(event.getMember()).getId(),
-                Objects.requireNonNull(event.getOption("character")).getAsString(),
-                1.);
+
+        PlayerVO user = new PlayerVO();
+        user.setId_name(m.getId());
+        user.setChar_name(event.getOption("character").getAsString());
+        user.setCur_level(1.);
         LOGGER.info("{}", user);
         PlayerDAO.deletePlayer(user);
         event.reply(user.getChar_name() + " 삭제").setEphemeral(true).queue();

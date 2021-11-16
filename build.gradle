@@ -34,7 +34,10 @@ dependencies {
     implementation group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '21.1.0.0'
     // https://mvnrepository.com/artifact/org.jsoup/jsoup
     implementation 'org.jsoup:jsoup:1.13.1'
-    implementation 'junit:junit:4.13.1'
+//    implementation 'junit:junit:4.13.1'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+
     // https://mvnrepository.com/artifact/com.oracle.database.security/oraclepki
     implementation 'com.oracle.database.security:oraclepki:21.3.0.0'
     // https://mvnrepository.com/artifact/com.oracle.database.security/osdt_core

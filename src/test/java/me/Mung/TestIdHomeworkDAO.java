@@ -2,7 +2,8 @@ package me.Mung;
 
 import me.Mung.Model.IdHomeworkDAO;
 import me.Mung.Model.IdHomeworkVO;
-import org.junit.Test;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +17,7 @@ public class TestIdHomeworkDAO {
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(TestIdHomeworkDAO.class);
     Map<String, Map<String, Integer>> map;
 
-    @Test
+    @RepeatedTest(20)
     public void TestF() {
         List<IdHomeworkVO> list = IdHomeworkDAO.getIdHomeworkList("530042930732335113");
         list.forEach(IdHomeworkVO -> {

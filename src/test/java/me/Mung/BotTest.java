@@ -3,16 +3,18 @@
  */
 package me.Mung;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import javax.security.auth.login.LoginException;
-import static org.junit.Assert.assertNotNull;
+
 public class BotTest {
 
     @Test
     public void testAppHasAGreeting() throws LoginException {
         Bot classUnderTest = new Bot();
 
-        assertNotNull("app should have a greeting", classUnderTest);
+        Assertions.assertNotNull(classUnderTest);//"app should have a greeting",
 
     }
 }

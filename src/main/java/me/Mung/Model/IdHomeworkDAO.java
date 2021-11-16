@@ -1,15 +1,14 @@
 package me.Mung.Model;
 
+import me.Mung.util.DBConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static me.Mung.util.DBConnection.ds;
-import static me.Mung.util.DBConnection.rs;
 
 public class IdHomeworkDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(IdHomeworkDAO.class);
@@ -19,9 +18,9 @@ public class IdHomeworkDAO {
 
         List<IdHomeworkVO> list = new ArrayList<>();
         try {
-            PreparedStatement pstmt = ds.getConnection().prepareStatement(sql);
+            PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
             pstmt.setString(1, id);
-            rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 IdHomeworkVO player = new IdHomeworkVO();
                 player.setId_name(rs.getString(1));
@@ -29,6 +28,7 @@ public class IdHomeworkDAO {
                 player.setCnt(rs.getInt(3));
                 list.add(player);
             }
+            DBConnection.close();
         } catch (SQLException e) {
             LOGGER.error("GetList : {}", e.getMessage());
         }

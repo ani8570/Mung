@@ -27,8 +27,8 @@ public class SlashCommandHello2 implements SlashCommand, ButtonCommand, Selectio
     SelectionMenu menu;
 
     List<Button> buttonList;
-    List<IdDungeonVO> idDungeonList;
-    List<CharDungeonVO> charDungeonList;
+    List<IdDungeonVO> idDungeonList = IdDungeonDAO.getIdDungeonList();
+    List<CharDungeonVO> charDungeonList = CharDungeonDAO.getCharDungeonList();
     boolean Flag = true;
 
     public SlashCommandHello2() {
@@ -39,8 +39,7 @@ public class SlashCommandHello2 implements SlashCommand, ButtonCommand, Selectio
         buttonList.add(Button.primary("H2:103", "4"));
 
         optionList = new ArrayList<>();
-        charDungeonList = CharDungeonDAO.getCharDungeonList();
-        idDungeonList = IdDungeonDAO.getIdDungeonList();
+
         for (int i = 0; i < idDungeonList.size(); i++) {
             optionList.add(SelectOption.of(idDungeonList.get(i).getDungeon_name(), "H2:" + i));
         }

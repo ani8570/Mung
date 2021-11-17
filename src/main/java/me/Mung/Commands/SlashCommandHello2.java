@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
@@ -27,6 +28,7 @@ public class SlashCommandHello2 implements SlashCommand, ButtonCommand, Selectio
     SelectionMenu menu;
 
     List<Button> buttonList;
+//    List<>
     List<IdDungeonVO> idDungeonList = IdDungeonDAO.getIdDungeonList();
     List<CharDungeonVO> charDungeonList = CharDungeonDAO.getCharDungeonList();
     boolean Flag = true;

@@ -40,9 +40,6 @@ public class Bot {
         jda.addEventListener(slashCmdMan = new SlashCommandManager());
         consoleListener();
         activitySwitcher();
-//        jda.upsertCommand("ping", "Calculate ping of the bot").queue(); // This can take up to 1 hour to show up in the client
-//        jda.upsertCommand("hello", "hello").queue(); // This can take up to 1 hour to show up in the client
-//        jda.upsertCommand("info", "info").queue(); // This can take up to 1 hour to show up in the client
     }
 
     private void activitySwitcher() {

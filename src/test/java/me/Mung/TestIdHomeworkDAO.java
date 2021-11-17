@@ -17,9 +17,11 @@ public class TestIdHomeworkDAO {
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(TestIdHomeworkDAO.class);
     Map<String, Map<String, Integer>> map;
 
-    @RepeatedTest(20)
+    //    @RepeatedTest(20)
+    @Test
     public void TestF() {
-        List<IdHomeworkVO> list = IdHomeworkDAO.getIdHomeworkList("530042930732335113");
+        List<IdHomeworkVO> list = IdHomeworkDAO.getIdHomeworkList("788767702088810517");
+        LOGGER.info("{}", list);
         list.forEach(IdHomeworkVO -> {
             LOGGER.info("{}", IdHomeworkVO);
 //            LOGGER.info("{}", IdHomeworkVO.getM().get("530042930732335113").get("도비스"));

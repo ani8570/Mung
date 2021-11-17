@@ -27,7 +27,7 @@ public class SlashCommandLs implements SlashCommand {
         // 이름이 없으면 아이디에 등록된 캐릭터들 최신화 목록 가져옴
         if (char_name == null) {
             List<PlayerVO> list = PlayerDAO.getCharList(m.getId());
-            if (list.size() == 0) {
+            if (list.isEmpty()) {
                 replyMessage.append("/mk로 등록을 먼저하세요");
                 LOGGER.error("Not located player");
             } else {
@@ -35,6 +35,7 @@ public class SlashCommandLs implements SlashCommand {
                     replyMessage.append(String.format("%-10.2f\t", player.getCur_level()));
                     replyMessage.append(player.getChar_name());
                     replyMessage.append("\n");
+                    PlayerDAO.updatePlayer(player);
                     LOGGER.info("{}", player);
                 });
             }

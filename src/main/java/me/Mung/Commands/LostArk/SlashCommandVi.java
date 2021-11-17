@@ -1,23 +1,21 @@
 package me.Mung.Commands.LostArk;
 
-import lombok.extern.java.Log;
-import me.Mung.Model.*;
-import me.Mung.type.ButtonCommand;
+import me.Mung.Model.CharHomeworkDAO;
+import me.Mung.Model.IdHomeworkDAO;
+import me.Mung.Model.IdHomeworkVO;
 import me.Mung.type.SlashCommand;
-import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
-import net.dv8tion.jda.api.interactions.components.Button;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
-public class SlashCommandCat implements SlashCommand {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SlashCommandCat.class);
+public class SlashCommandVi implements SlashCommand {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlashCommandVi.class);
     List<IdHomeworkVO> idHomeworkList;
     //던전      닉네임         회수
     Map<String, Map<String, Integer>> charHomeworkMap;

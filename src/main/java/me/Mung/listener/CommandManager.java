@@ -21,7 +21,6 @@ public class CommandManager implements Command {
         commands = new HashMap<String, Command>();
         commands.put("ping", new CommandPing());
         commands.put("kv", new CommandKVoice());
-
     }
 
 
@@ -33,7 +32,6 @@ public class CommandManager implements Command {
             command.performCommand(m, channel, message);
         } else {
             LOGGER.error("Error : Not exist command");
-
         }
     }
 }

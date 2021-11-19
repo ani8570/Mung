@@ -3,7 +3,6 @@ package me.Mung;
 import me.Mung.Model.CharHomeworkDAO;
 import me.Mung.Model.CharHomeworkVO;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +15,7 @@ public class TestCharHomeworkDAO {
 
     @RepeatedTest(20)
     public void TestF() {
-        List<CharHomeworkVO> list = CharHomeworkDAO.getCharHomeworkList("530042930732335113");
+        List<CharHomeworkVO> list = CharHomeworkDAO.getAllCharHomeworkList("530042930732335113");
         list.forEach(hwk -> {
             LOGGER.info("{}", hwk);
         });

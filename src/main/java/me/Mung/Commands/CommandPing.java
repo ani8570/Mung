@@ -16,6 +16,6 @@ public class CommandPing implements Command {
         LOGGER.info(m.getUser().getAsTag());
         message.reply("Pong!").queue();
         channel.sendMessage(":ping_pong: " + m.getAsMention()).queue();
-
+        m.getUser().openPrivateChannel().flatMap(c -> c.sendMessage("hello")).queue();
     }
 }

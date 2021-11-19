@@ -6,6 +6,8 @@ import me.Mung.type.SlashCommand;
 import me.Mung.util.LACrawling;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.slf4j.Logger;
@@ -59,4 +61,13 @@ public class SlashCommandLs implements SlashCommand {
 
     }
 
+    @Override
+    public void performCommand(ButtonClickEvent event, Member m, TextChannel channel) {
+
+    }
+
+    @Override
+    public void performCommand(SelectionMenuEvent event, Member m, TextChannel channel) {
+
+    }
 }

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class IdDungeonDAO {
@@ -15,7 +16,7 @@ public class IdDungeonDAO {
 
     public static List<IdDungeonVO> getIdDungeonList() {
         String sql = "select * from LA.ID_DUNGEON order by cur_lv DESC";
-        List<IdDungeonVO> list = new ArrayList<>();
+        List<IdDungeonVO> list = new LinkedList<>();
         try {
             Statement stmt = DBConnection.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);

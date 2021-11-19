@@ -5,6 +5,8 @@ import me.Mung.Model.PlayerVO;
 import me.Mung.type.SlashCommand;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,5 +43,15 @@ public class SlashCommandMk implements SlashCommand {
             s.append("에 등록");
         }
         event.reply(String.valueOf(s)).setEphemeral(true).queue();
+    }
+
+    @Override
+    public void performCommand(ButtonClickEvent event, Member m, TextChannel channel) {
+
+    }
+
+    @Override
+    public void performCommand(SelectionMenuEvent event, Member m, TextChannel channel) {
+
     }
 }

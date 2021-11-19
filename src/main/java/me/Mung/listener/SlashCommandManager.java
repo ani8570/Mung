@@ -13,7 +13,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,9 +23,8 @@ import static me.Mung.Bot.jda;
 
 public class SlashCommandManager extends ListenerAdapter {
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(SlashCommandManager.class);
+    //TODO edit SlashCommand interface
     private Map<String, SlashCommand> commandMap;
-    private Map<String, ButtonCommand> buttonMap;
-    private Map<String, SelectionMenuCommand> selectionMap;
 
     public SlashCommandManager() {
         commandMap = new ConcurrentHashMap<>();
@@ -35,20 +33,15 @@ public class SlashCommandManager extends ListenerAdapter {
         commandMap.put("mk", new SlashCommandMk());
         commandMap.put("rm", new SlashCommandRm());
         commandMap.put("cat", new SlashCommandCat());
+        commandMap.put("cat2", new SlashCommandCat2());
         commandMap.put("help", new SlashCommandHelp());
         commandMap.put("hello2", new SlashCommandHello2());
-
-        buttonMap = new ConcurrentHashMap<>();
-        buttonMap.put("H", new SlashCommandHello());
-        buttonMap.put("H2", new SlashCommandHello2());
-
-        selectionMap = new ConcurrentHashMap<>();
-        selectionMap.put("H2", new SlashCommandHello2());
+        commandMap.put("vi", new SlashCommandVi());
 
         jda.updateCommands().queue();
-
         jda.getGuildById("897348952603623464")
                 .updateCommands()
+                .addCommands(new CommandData("vi", "set env"))
                 .addCommands(new CommandData("ls", "Find your Charactor")
                         .addOptions(new OptionData(OptionType.STRING, "character", "Nickname ")
                                 .setRequired(false)))
@@ -58,15 +51,12 @@ public class SlashCommandManager extends ListenerAdapter {
                 .addCommands(new CommandData("rm", "Remove your Charactor")
                         .addOptions(new OptionData(OptionType.STRING, "character", "Nickname ")
                                 .setRequired(true)))
-                .addCommands(new CommandData("cat", "Show your Homework")
-                        .addOptions(new OptionData(OptionType.STRING, "character", "Nickname ")
-                                .setRequired(false)))
+                .addCommands(new CommandData("cat", "Show your Homework"))
+                .addCommands(new CommandData("cat2", "Show your Homework"))
                 .addCommands(new CommandData("help", "Show all commands"))
                 .addCommands(new CommandData("hello", "Button Test"))
                 .addCommands(new CommandData("hello2", "Selection Tese"))
-
                 .queue();
-
 
     }
 
@@ -81,24 +71,24 @@ public class SlashCommandManager extends ListenerAdapter {
 
     @Override
     public void onButtonClick(ButtonClickEvent event) {
-        String buttonName = event.getComponentId();
+        String buttonName = event.getComponentId().toLowerCase();
 
         ButtonCommand command;
         LOGGER.info("{}", buttonName);
 
-        if ((command = buttonMap.get(buttonName.split(":")[0])) != null) {
+        if ((command = commandMap.get(buttonName.split(":")[0])) != null) {
             command.performCommand(event, event.getMember(), event.getTextChannel());
         }
     }
 
     @Override
-    public void onSelectionMenu(@NotNull SelectionMenuEvent event) {
-        String selectionName = event.getComponentId();
+    public void onSelectionMenu(SelectionMenuEvent event) {
+        String selectionName = event.getComponentId().toLowerCase();
 
         SelectionMenuCommand command;
         LOGGER.info("{}", selectionName);
 
-        if ((command = selectionMap.get(selectionName.split(":")[0])) != null) {
+        if ((command = commandMap.get(selectionName.split(":")[0])) != null) {
             command.performCommand(event, event.getMember(), event.getTextChannel());
         }
     }

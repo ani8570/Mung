@@ -3,6 +3,10 @@
  */
 package me.Mung;
 
+import me.Mung.Model.CharDungeonDAO;
+import me.Mung.Model.CharDungeonVO;
+import me.Mung.Model.IdDungeonDAO;
+import me.Mung.Model.IdDungeonVO;
 import me.Mung.listener.CommandManager;
 import me.Mung.listener.EventListener;
 import me.Mung.listener.MessageListener;
@@ -17,11 +21,14 @@ import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class Bot {
     public static CommandManager cmdMan;
     public static SlashCommandManager slashCmdMan;
     public static JDA jda;
+//    public static List<CharDungeonVO> charDungeonList = CharDungeonDAO.getCharDungeonList();
+//    public static List<IdDungeonVO> idDungeonList = IdDungeonDAO.getIdDungeonList();
 
 
     //기본 생성자를 통해 봇 활성화
@@ -31,8 +38,6 @@ public class Bot {
 
         builder.addEventListeners(new EventListener());
         builder.addEventListeners(new MessageListener());
-//        builder.addEventListeners(new AudioEchoExample());
-
         builder.setActivity(Activity.playing("교미"));
         builder.setStatus(OnlineStatus.ONLINE);
         jda = builder.build();

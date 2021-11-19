@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.components.Button;
@@ -58,7 +59,7 @@ public class SlashCommandCat implements SlashCommand {
     @Override
     public void performCommand(SlashCommandEvent event, Member m, TextChannel channel) {
         LOGGER.info(m.getUser().getAsTag());
-        OptionMapping char_name = event.getOption("character");
+
         StringBuffer replyMessage = new StringBuffer();
         //아이디에 해당된 전체 리스트를 StringBuffer로 모아 reply로 출력
         idHomeworkList = IdHomeworkDAO.getIdHomeworkList(m.getId());
@@ -73,5 +74,15 @@ public class SlashCommandCat implements SlashCommand {
         }
         LOGGER.info("{}", replyMessage.length());
         event.reply(String.valueOf(replyMessage)).setEphemeral(true).queue();
+    }
+
+    @Override
+    public void performCommand(ButtonClickEvent event, Member m, TextChannel channel) {
+
+    }
+
+    @Override
+    public void performCommand(SelectionMenuEvent event, Member m, TextChannel channel) {
+        
     }
 }

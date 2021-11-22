@@ -39,7 +39,7 @@ public class CommandManager implements Command {
         if (!channel.getId().equalsIgnoreCase("912180663749333063"))
             return;
 
-        String cmd = message.getContentRaw().substring(1);
+        String cmd = message.getContentRaw().split(" ")[0].substring(1);
         Command command;
         if ((command = commands.get(cmd.toLowerCase())) != null) {
             command.performCommand(m, channel, message);

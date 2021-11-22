@@ -33,9 +33,4 @@ public class LACrawling {
         return d;
     }
 
-    public static void main(String[] args) {
-        String charName = "남궁다";
-        Double d = FindLevel(charName);
-        LOGGER.info("URL {}", d);
-    }
 }

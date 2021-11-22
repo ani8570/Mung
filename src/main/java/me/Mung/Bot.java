@@ -27,8 +27,6 @@ public class Bot {
     public static CommandManager cmdMan;
     public static SlashCommandManager slashCmdMan;
     public static JDA jda;
-//    public static List<CharDungeonVO> charDungeonList = CharDungeonDAO.getCharDungeonList();
-//    public static List<IdDungeonVO> idDungeonList = IdDungeonDAO.getIdDungeonList();
 
 
     //기본 생성자를 통해 봇 활성화

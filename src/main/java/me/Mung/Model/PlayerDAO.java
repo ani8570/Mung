@@ -50,7 +50,7 @@ public class PlayerDAO {
             pstmt.setString(1, user.getId_name());
             pstmt.setString(2, user.getChar_name());
             pstmt.setDouble(3, user.getCur_level());
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             DBConnection.close();
         } catch (SQLException e) {
             LOGGER.error("Insert : {}", e.getMessage());
@@ -66,7 +66,7 @@ public class PlayerDAO {
             pstmt.setString(1, user.getId_name());
             pstmt.setString(2, user.getChar_name());
             pstmt.setDouble(3, user.getCur_level());
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             DBConnection.close();
         } catch (SQLException e) {
             LOGGER.error("Delete : {}", e.getMessage());
@@ -81,7 +81,7 @@ public class PlayerDAO {
             PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
             pstmt.setDouble(1, user.getCur_level());
             pstmt.setString(2, user.getChar_name());
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             DBConnection.close();
         } catch (SQLException e) {
             LOGGER.error("Update : {}", e.getMessage());

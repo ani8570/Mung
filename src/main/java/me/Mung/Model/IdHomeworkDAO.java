@@ -35,4 +35,21 @@ public class IdHomeworkDAO {
         return list;
     }
 
+    public static void updateIdHomework(String id, int cnt,List<String> dungeon_name) {
+        String sql = "update LA.Id_homework set cnt = ? where id_name = ? and DUNGEON_NAME = ?";
+
+        List<IdHomeworkVO> list = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
+            pstmt.setString(1, String.valueOf(cnt));
+            pstmt.setString(2, id);
+            for (String s : dungeon_name) {
+                pstmt.setString(3, s);
+                pstmt.executeUpdate();
+            }
+            DBConnection.close();
+        } catch (SQLException e) {
+            LOGGER.error("update : {}", e.getMessage());
+        }
+    }
 }

@@ -16,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class TestCharHomeworkDAO2 {
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(TestCharHomeworkDAO2.class);
 
-//    @Test
+    //    @Test
     @RepeatedTest(20)
     public void TestF() {
 //        String id = "788767702088810517";
         String id = "530042930732335113";
-        Map<String, Map<String, Integer>> map = CharHomeworkDAO.getCharHomeworkMap(id);
+        Map<String, Map<String, Integer>> map = null;
+//        map = CharHomeworkDAO.getCharHomeworkMap(id);
         assert map != null;
         assert map.values() != null;
         map.forEach((key, val) -> {

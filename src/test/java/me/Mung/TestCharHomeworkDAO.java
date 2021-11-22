@@ -15,10 +15,10 @@ public class TestCharHomeworkDAO {
 
     @RepeatedTest(20)
     public void TestF() {
-        List<CharHomeworkVO> list = CharHomeworkDAO.getAllCharHomeworkList("530042930732335113");
-        list.forEach(hwk -> {
-            LOGGER.info("{}", hwk);
-        });
+//        List<CharHomeworkVO> list = CharHomeworkDAO.getAllCharHomeworkList("530042930732335113");
+//        list.forEach(hwk -> {
+//            LOGGER.info("{}", hwk);
+//        });
     }
 
 

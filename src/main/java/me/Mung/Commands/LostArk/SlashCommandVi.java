@@ -55,7 +55,7 @@ public class SlashCommandVi implements SlashCommand, ButtonCommand, SelectionMen
         if (event.getComponentId().equals("vi:button:000") || event.getComponentId().equals("vi:button:001")) {
             playerList = PlayerDAO.getCharList(m.getId());
             if (playerList.isEmpty()) {
-                event.reply("/mk를 통해 캐릭터 등록을 먼저해주세요.").setEphemeral(true).queue();
+                event.reply("캐릭터 등록을 먼저해주세요.").setEphemeral(true).queue();
                 return;
             }
             List<SelectOption> optionList = new LinkedList<>();

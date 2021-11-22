@@ -15,16 +15,17 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class CommandManager implements Command {
-    private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(CommandManager.class);
-    private Map<String, Command> commands;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommandManager.class);
+    private final Map<String, Command> commands;
 
     //명령어 모음
     public CommandManager() {
-        commands = new HashMap<String, Command>();
-        commands.put("ping", new CommandPing());
-        commands.put("kv", new CommandKVoice());
+        commands = new HashMap<>();
+//        commands.put("ping", new CommandPing());
+//        commands.put("kv", new CommandKVoice());
         commands.put("help", new CommandHelp());
         commands.put("", new CommandHelp());
         commands.put("등록", new CommandMk());
@@ -35,12 +36,16 @@ public class CommandManager implements Command {
 
     @Override
     public void performCommand(Member m, TextChannel channel, Message message) {
-        String cmd = message.getContentDisplay().split(" ")[0].substring(1);
+        if (!channel.getId().equalsIgnoreCase("912180663749333063"))
+            return;
+
+        String cmd = message.getContentRaw().substring(1);
         Command command;
         if ((command = commands.get(cmd.toLowerCase())) != null) {
             command.performCommand(m, channel, message);
         } else {
             LOGGER.error("Error : Not exist command");
+            message.delete().queueAfter(10, TimeUnit.SECONDS);
         }
     }
 }

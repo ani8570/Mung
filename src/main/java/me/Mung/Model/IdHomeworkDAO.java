@@ -52,4 +52,16 @@ public class IdHomeworkDAO {
             LOGGER.error("update : {}", e.getMessage());
         }
     }
+
+    public static void resetWeeklyIdHomework() {
+        String sql = "update LA.Id_homework set cnt = 0";
+
+        try {
+            PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
+            pstmt.executeUpdate();
+            DBConnection.close();
+        } catch (SQLException e) {
+            LOGGER.error("update : {}", e.getMessage());
+        }
+    }
 }

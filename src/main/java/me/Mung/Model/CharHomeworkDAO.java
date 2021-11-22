@@ -15,27 +15,6 @@ import java.util.Map;
 public class CharHomeworkDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(CharHomeworkDAO.class);
 
-//    public static List<CharHomeworkVO> getAllCharHomeworkList(String id) {
-//        String sql = "select * from LA.Char_homework where char_name in (select char_name from player where id_name = ?)"; //order by cur_lv";
-//        List<CharHomeworkVO> list = new ArrayList<>();
-//        try {
-//            PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
-//            pstmt.setString(1, id);
-//            ResultSet rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                CharHomeworkVO player = new CharHomeworkVO();
-//                player.setChar_name(rs.getString(1));
-//                player.setDungeon_name(rs.getString(2));
-//                player.setCnt(rs.getInt(3));
-//                list.add(player);
-//            }
-//            DBConnection.close();
-//        } catch (SQLException e) {
-//            LOGGER.error("GetList : {}", e.getMessage());
-//        }
-//        return list;
-//    }
-
     public static List<CharHomeworkVO> getCharHomeworkList(String charName) {
         String sql = "select * from LA.Char_homework where char_name = ?"; //order by cur_lv";
         List<CharHomeworkVO> list = new ArrayList<>();
@@ -57,32 +36,6 @@ public class CharHomeworkDAO {
         return list;
     }
 
-//    public static Map<String, Map<String, Integer>> getCharHomeworkMap(String id) {
-//        String sql = "select char_homework.char_name, char_homework.dungeon_name, char_homework.cnt from Char_homework, player\n" +
-//                "where char_homework.char_name = player.char_name\n" +
-//                "and Char_homework.char_name in (select player.char_name from player where player.id_name = ?)\n" +
-//                "order by player.cur_lv desc";
-////        String sql = "select * from LA.Char_homework where char_name in (select char_name from player where id_name = ?)"; //order by cur_lv";
-//        Map<String, Map<String, Integer>> map = new LinkedHashMap<>();
-//        try {
-//            PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
-//            pstmt.setString(1, id);
-//            ResultSet rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                if (!map.containsKey(rs.getString(2))) {
-//                    map.put(rs.getString(2), new LinkedHashMap<>());
-//                }
-//                map.get(rs.getString(2))
-//                        .put(rs.getString(1), rs.getInt(3));
-//            }
-//            DBConnection.close();
-//        } catch (SQLException e) {
-//            LOGGER.error("GetMap : {}", e.getMessage());
-//            return null;
-//        }
-//        return map;
-//    }
-
     public static void updateCharHomework(String char_name, int cnt, List<String> dungeon_name) {
         String sql = "update LA.char_homework set cnt = ? where char_name = ? and DUNGEON_NAME = ?";
 
@@ -95,6 +48,36 @@ public class CharHomeworkDAO {
                 pstmt.setString(3, s);
                 pstmt.executeUpdate();
             }
+            DBConnection.close();
+        } catch (SQLException e) {
+            LOGGER.error("update : {}", e.getMessage());
+        }
+    }
+
+    public static void resetDailyCharHomework() {
+        String sql = "update LA.char_homework\n" +
+                "set cnt = 0\n" +
+                "where (char_name, dungeon_name) in\n" +
+                "(select h.char_name, h.dungeon_name\n" +
+                "from LA.char_dungeon d, LA.char_homework h\n" +
+                "where d.sort_num = 1\n" +
+                "and d.dungeon_name = h.dungeon_name)";
+
+        try {
+            PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
+            pstmt.executeUpdate();
+            DBConnection.close();
+        } catch (SQLException e) {
+            LOGGER.error("update : {}", e.getMessage());
+        }
+    }
+
+    public static void resetWeeklyCharHomework() {
+        String sql = "update LA.char_homework set cnt = 0";
+
+        try {
+            PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
+            pstmt.executeUpdate();
             DBConnection.close();
         } catch (SQLException e) {
             LOGGER.error("update : {}", e.getMessage());

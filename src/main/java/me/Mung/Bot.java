@@ -3,10 +3,6 @@
  */
 package me.Mung;
 
-import me.Mung.Model.CharDungeonDAO;
-import me.Mung.Model.CharDungeonVO;
-import me.Mung.Model.IdDungeonDAO;
-import me.Mung.Model.IdDungeonVO;
 import me.Mung.listener.CommandManager;
 import me.Mung.listener.EventListener;
 import me.Mung.listener.MessageListener;
@@ -21,7 +17,6 @@ import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 public class Bot {
     public static CommandManager cmdMan;
@@ -36,7 +31,7 @@ public class Bot {
 
         builder.addEventListeners(new EventListener());
         builder.addEventListeners(new MessageListener());
-        builder.setActivity(Activity.playing("교미"));
+        builder.setActivity(Activity.playing("숙제 관리"));
         builder.setStatus(OnlineStatus.ONLINE);
         jda = builder.build();
         cmdMan = new CommandManager();
@@ -46,10 +41,8 @@ public class Bot {
     }
 
     private void activitySwitcher() {
-        new WalkScheduler().execute(06, 30, 00);
-        new WalkScheduler().execute(11, 00, 00);
-        new WalkScheduler().execute(16, 00, 00);
-        new WalkScheduler().execute(21, 30, 00);
+        new WalkScheduler().resetHomework(06, 00, 00);
+        new WalkScheduler().walking(06, 00, 00);
 
     }
 

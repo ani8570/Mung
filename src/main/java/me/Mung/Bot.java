@@ -41,9 +41,11 @@ public class Bot {
     }
 
     private void activitySwitcher() {
-        new WalkScheduler().resetHomework(06, 00, 00);
-        new WalkScheduler().walking(06, 00, 00);
-
+        new WalkScheduler().resetHomework(6, 0, 0);
+        new WalkScheduler().walking(6, 30, 0);
+        new WalkScheduler().walking(11, 0, 0);
+        new WalkScheduler().walking(16, 0, 0);
+        new WalkScheduler().walking(21, 30, 0);
     }
 
     private void consoleListener() {
